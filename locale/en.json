@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "因维思·invest-skill投研专家",
+    "description": "An A-share research analyst preset with 15 bundled skills: policy interpretation, market hotspots, industry chains, five-dimension stock diagnosis, value investing, multi-stock comparison, daily and overnight review, and quant picking. It picks the right skill from your question, loads its methodology, and answers with sources and risk labels. Choose 因维思·invest-skill投研专家 when creating a session; its skills stay scoped to that preset and leave other sessions untouched. Data comes from web_search / web_fetch, or an optional Tushare MCP enabled with TUSHARE_TOKEN in $DSH_HOME/.env. The upstream 妙想 / 腾讯自选股 / 通达信 MCPs are not bundled, the bundled market snapshot ends 2026-10-27, and some skill scripts need akshare, tushare or scikit-learn. Missing data is reported as N/A; nothing here is investment advice."
+  }
+}

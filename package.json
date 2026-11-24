@@ -1,0 +1,47 @@
+{
+  "name": "dsh-invest-skill",
+  "version": "1.1.0",
+  "type": "module",
+  "description": "DeepSeek Harness bundle: the Yinweisi A-share research agent preset with 15 investment research skills.",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Warwick"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warwickinv/dsh-invest-skill.git"
+  },
+  "homepage": "https://github.com/warwickinv/dsh-invest-skill#readme",
+  "bugs": {
+    "url": "https://github.com/warwickinv/dsh-invest-skill/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "a-share",
+    "investment-research",
+    "agent-preset",
+    "skills"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.jpg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "skills",
+    "locale/*.json",
+    "icon.jpg",
+    "LICENSE",
+    "UPSTREAM_LICENSE",
+    "UPSTREAM_NOTICE",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

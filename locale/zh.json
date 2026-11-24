@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "因维思·invest-skill投研专家",
+    "description": "一位 A 股投研分析师：内置 15 个投研技能，按你的问题自动选中技能并加载方法论，输出带来源与风险标注的研究结论。新建会话时在预设列表选「因维思·invest-skill投研专家」即可用；技能只作用在该预设，其他会话的技能目录不受影响。数据走 web_search / web_fetch，可选启用 Tushare MCP（在 $DSH_HOME/.env 写 TUSHARE_TOKEN）；上游的妙想 / 腾讯自选股 / 通达信 MCP 未内置，内置行情快照截止 2026-10-27，部分技能脚本需自行安装 akshare、tushare、scikit-learn。取不到的数据一律标 N/A，不构成投资建议；关闭或卸载插件后预设与全部技能一并消失。"
+  }
+}
