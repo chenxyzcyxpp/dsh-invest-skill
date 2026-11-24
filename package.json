@@ -33,6 +33,7 @@
     "cordis.patch.yml",
     "skills",
     "locale/*.json",
+    "docs",
     "icon.jpg",
     "LICENSE",
     "UPSTREAM_LICENSE",
