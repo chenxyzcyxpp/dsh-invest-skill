@@ -104,7 +104,7 @@
 |---|---|
 | 插件页 | **插件 → 添加插件** → 选本地目录 |
 | 命令行 | `dsh plugin add dsh-invest-skill`（已发布到 npm 时） |
-| 源码 | `dsh plugin add https://github.com/warwickinv/dsh-invest-skill` |
+| 源码 | `dsh plugin add https://github.com/chenxyzcyxpp/dsh-invest-skill` |
 
 - **卸载**：插件页关闭/移除本 bundle。关闭后预设与 15 个技能一并消失，其他会话不受影响。
 - **注意**：已有会话保留它启动时的预设；改用本专家需**新建会话**。
@@ -127,7 +127,7 @@ README.md            # 本文件，即插件详情页的内容
 ## 许可与免责
 
 - 本 bundle：**Apache-2.0**（见 `LICENSE`）。
-- 随包分发的 15 个技能改编自 [invest-skill](https://gitee.com/warwickInv/invest-skill)（Apache-2.0），
+- 随包分发的 15 个技能改编自 [invest-skill](https://gitee.com/chenxyzcyxpp/invest-skill)（Apache-2.0），
   原始版权与署名见 `UPSTREAM_LICENSE` 与 `UPSTREAM_NOTICE`。
 - 本包不包含、不分发行情数据；数据源由使用者自行接入并遵守相应服务条款。
 

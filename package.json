@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/warwickinv/dsh-invest-skill.git"
+    "url": "git+https://github.com/chenxyzcyxpp/dsh-invest-skill.git"
   },
-  "homepage": "https://github.com/warwickinv/dsh-invest-skill#readme",
+  "homepage": "https://github.com/chenxyzcyxpp/dsh-invest-skill#readme",
   "bugs": {
-    "url": "https://github.com/warwickinv/dsh-invest-skill/issues"
+    "url": "https://github.com/chenxyzcyxpp/dsh-invest-skill/issues"
   },
   "keywords": [
     "dsh-plugin",
