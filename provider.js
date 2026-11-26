@@ -34,6 +34,7 @@ const SKILL_DIRS = [
   'overnight_review',
   'racing_quant_pick',
   'aggressive_growth_strategy',
+  'session_analysis',
 ]
 
 /** 与内置 bundled 技能同级的排序权重（数值越大优先级越低，仅同层内比较）。 */

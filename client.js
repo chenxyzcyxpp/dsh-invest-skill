@@ -14,6 +14,12 @@ window.__ModuleLoader__.load({
     // ── 数据 ────────────────────────────────────────────────
     const GROUPS = [
       {
+        title: '场景编排',
+        items: [
+          ['session-analysis', '盘前 / 午盘 / 盘后综合分析：按时段配方串起多个技能，出一份报告 + 卡片'],
+        ],
+      },
+      {
         title: '宏观与事件',
         items: [
           ['policy-interpretation', '政策文件解读，判断对行业与市场的影响'],
@@ -203,7 +209,7 @@ window.__ModuleLoader__.load({
             h(
               'p',
               { style: { margin: 0, color: 'var(--dsw-alias-label-secondary)', fontSize: 13 } },
-              '15 个投研技能，按你的问题自动命中；这里是全部清单与常用提问。',
+              '16 个投研能力，按你的问题自动命中；这里是全部清单与常用提问。',
             ),
           ),
         ),
