@@ -17,7 +17,7 @@
   （上层降级为仅股吧并标注）。
 - `data.py fetch_kline()`：东财 push2his 优先 → 失败自动回退 Tushare
   （`daily` + `daily_basic` 换手率，amount 千元→元 ×1000，token 取自
-  `平台依赖声明`）；两个源都失败才抛错。
+  `~/.hermes/config.yaml`）；两个源都失败才抛错。
 - `sentiment.py merge_opinion_channels()`：多通道逐日加权合成（weights 默认 0.5/0.5）。
 - `cli.py`：`--no-news` 关闭新闻通道；meta 带 `channels_meta` / `news_titles`。
 - `report.py`：控制台/HTML/JSON 三处展示通道明细 + 新闻标题。

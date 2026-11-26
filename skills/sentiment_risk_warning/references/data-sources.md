@@ -32,7 +32,7 @@ Agent 侧通过 `tdx_kline(code="000001", setcode="1", period="4", wantNum=1250)
 | 用途 | 接口 | 说明 |
 |---|---|---|
 | 日 K 线（前复权） | `push2his.eastmoney.com/api/qt/stock/kline/get` | secid=1.沪/0.深，fields2=f51..f61（date/open/close/high/low/vol/amount/振幅/pct/涨跌额/换手） |
-| 日 K 线（回退） | Tushare `daily` + `daily_basic` | 东财 push2his 不可达时自动回退（本机实测可用）；daily.amount 千元→元 ×1000；换手率取自 daily_basic.turnover_rate；授权由平台依赖声明统一管理 |
+| 日 K 线（回退） | Tushare `daily` + `daily_basic` | 东财 push2his 不可达时自动回退（本机实测可用）；daily.amount 千元→元 ×1000；换手率取自 daily_basic.turnover_rate；token 从 ~/.hermes/config.yaml 提取 |
 | 股吧帖子 | `guba.eastmoney.com/list,<code>_<page>.html` | HTML 正则解析标题（class=article-title / a[title]） |
 | 个股新闻 | `search-api-web.eastmoney.com/search/jsonp` | keyword=股票名称（push2 f58，失败退回代码）；cb() 解包；返回 date/title/content（去 <em> 高亮）；pageSize=30 单页 |
 | 行业板块涨跌幅 | `push2.eastmoney.com/api/qt/stock/get` | f127=行业名 f128=行业代码 → 板块指数 secid=`90.BKxxxx` 取 f170 |
@@ -90,8 +90,8 @@ Agent 侧通过 `tdx_kline(code="000001", setcode="1", period="4", wantNum=1250)
 | 新闻 | 东财 `search-api-web.eastmoney.com/search/jsonp` | **Tushare `pro.news` 无权限**；jsonp 用正则 `cb\((.*)\)` 解包，keyword="A股 大盘" |
 | 汇率 USDCNY | Tushare `fx_daily` | **无权限** → 兜底 7.15 中性值（变化率≈0，对模型影响可忽略） |
 
-Tushare 授权：由平台依赖声明统一管理，本地 `tushare` 库（v1.4.29 已装）可直接使用；原配置路径：
-`平台依赖声明` 的 `tushareMcp.url` 中 `token=` 参数提取；
+Tushare token：本地 `tushare` 库（v1.4.29 已装）可直接用，token 从
+`~/.hermes/config.yaml` 的 `tushareMcp.url` 中 `token=` 参数提取；
 用本地库而非 MCP 调大接口可避免 MCP 返回被截断（322KB 级响应会截断）。
 
 **注意（2026-10-09 实测）**：`get_tushare_token()` 打印「未从 config.yaml 提取到

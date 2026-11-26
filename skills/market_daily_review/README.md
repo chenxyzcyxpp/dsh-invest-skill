@@ -77,7 +77,7 @@ Tushare/Akshare/腾讯三级网关，故 `calls_gateway: false`（语义为"不�
 
 ## 五、依赖与运行
 
-- **真实运行需**：`akshare`（开源主源）；可选 `tushare`（优先源，需平台声明的 Tushare 授权）；`requests`（网页兜底）。
+- **真实运行需**：`akshare`（开源主源）；可选 `tushare`（优先源，需 `TUSHARE_TOKEN`）；`requests`（网页兜底）。
 - **无需第三方 Python 依赖即可验证管线**：`python3 scripts/market_review.py --demo`（`--demo` 模式使用内置样例，零外部依赖）。
 - 若需在独立环境校验 `skill.py` 可导入：`python3 -c "import market_daily_review.skill"`（无 `skills.base` 时自动降级，不报错）。
 

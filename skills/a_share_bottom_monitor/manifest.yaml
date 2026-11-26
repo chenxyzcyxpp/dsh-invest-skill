@@ -7,7 +7,7 @@ spec: SKILL.md
 description: "对主要指数（上证/深证成指/创业板指/中证2000）进行抄底位置监控：基于2014-2026十二年全量回测的固化信号地图，判断各指数当前是否满足抄底条件、满足到几档；支持每隔约180天自动重跑全部统计、比对结论变化、修订信号地图并记录更新历史；并在组合信号触发的下跌过程中，以「状态 + 路径 + 执行」三层输出路径风险、双基准超额、8 问决策检查表与唯一动作结论。v1.2 决策层扩展不改动既有统计口径与 signal_map 结论；v1.4 起模式C 仅在组合信号已触发时输出 8 问与动作结论，未触发时输出「本轮不适用」简报；v1.4.1 起第七节证伪落点表增列历史浮亏中位数／历史最深浮亏供风险预算，并由 check_integrity.py 自动拦截内部纪律文案回流到输出。"
 
 # 重要：本 Skill 是「脚本驱动型」（SKILL.md 提示词 + scripts/ 下可运行 Python）。
-# 其取数直连 Tushare Pro（daily / index_dailybasic，授权见 plugin.json dependencies），
+# 其取数直连 Tushare Pro（daily / index_dailybasic，通过环境变量 TUSHARE_TOKEN），
 # 不经由本项目可降级数据网关（ctx.gateway：Tushare > Akshare > 腾讯财经）。
 # 当前 skill.py 仅为占位骨架，真实执行逻辑在 SKILL.md + scripts/，需 LLM + Tushare
 # 支撑，尚未包装为 BaseSkill。
@@ -27,7 +27,7 @@ input:
   - name: tushare_token
     type: string
     required: false
-    description: "Tushare Pro 数据源（授权见 plugin.json dependencies）；不可用时仅用 data/ 内基线数据并明确告知"
+    description: "Tushare Pro token（也可走环境变量 TUSHARE_TOKEN）；缺失时仅用 data/ 内基线数据并明确告知"
   - name: out
     type: string
     required: false

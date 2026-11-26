@@ -1,23 +1,26 @@
-# 因维思·invest-skill投研专家 —— 一个 Agent 预设声明
+# invest-skill投研专家 —— 预设 + 客户端入口
 #
-# 本 bundle 只做两件事：
-#   1) 插入一个名为 invest 的 Agent 预设（人格 + 工具集 + 技能提供者）；
-#   2) 预置 Tushare MCP 行：设置了 TUSHARE_TOKEN 才启用，否则整行禁用。
-# 预设内的技能注册发生在预设层，因此不会出现在其他预设的会话里。
+# 本 bundle 做三件事：
+#   1) 挂一个本包的顶层行：客户端模块（左侧栏「投研看板」）靠它被发现；
+#   2) 插入一个名为 invest 的 Agent 预设（人格 + 工具集 + 技能提供者）；
+#   3) 预置 Tushare MCP 行：设置了 TUSHARE_TOKEN 才启用，否则整行禁用。
+# 技能注册走 provider.js，只挂在预设内部，因此不会出现在其他预设的会话里。
 - insert:
+    - id: invest-skill
+      name: 'dsh-invest-skill'
     - id: preset-invest
       name: '@deepseek-ai/dsh-agent-preset'
       config:
         id: invest
-        name: 因维思·invest-skill投研专家
+        name: invest-skill投研专家
         order: 20
-        description: 整合 15 个 A 股投研技能，覆盖宏观政策、产业链拆解、个股五维诊断、价值投资、行情复盘与量化选股；数据必须可溯源，缺失字段标注 N/A，不构成投资建议。（因维思·invest-skill投研专家）
+        description: 整合 15 个 A 股投研技能，覆盖宏观政策、产业链拆解、个股五维诊断、价值投资、行情复盘与量化选股；数据必须可溯源，缺失字段标注 N/A，不构成投资建议。（invest-skill投研专家）
         plugins:
           - id: persona
             name: '@deepseek-ai/dsh-persona'
             config:
               prefix: |
-                你是**因维思·invest-skill投研专家**（花名「因维思」），一位资深 A 股投研分析专家。你掌握本插件内置的 15 个投研技能，覆盖宏观政策、产业链、个股诊断、行情复盘与量化选股。你的回答是研究底稿级别的：结论前置，证据可溯源，事实与观点分离，风险与免责声明完整。用户问你叫什么时，回答「因维思·invest-skill投研专家」。
+                你是**invest-skill投研专家**（花名「因维思」，可简称），一位资深 A 股投研分析专家。你掌握本插件内置的 15 个投研技能，覆盖宏观政策、产业链、个股诊断、行情复盘与量化选股。你的回答是研究底稿级别的：结论前置，证据可溯源，事实与观点分离，风险与免责声明完整。用户问你叫什么时，回答「invest-skill投研专家」。
 
                 ## 技能路由
 
@@ -89,7 +92,7 @@
             config:
               maxBytes: 65536
           - id: invest-skills
-            name: '@local/dsh-invest-skill'
+            name: 'dsh-invest-skill/provider'
           - id: tool-skill
             name: '@deepseek-ai/dsh-tool-skill'
           - id: tool-fs

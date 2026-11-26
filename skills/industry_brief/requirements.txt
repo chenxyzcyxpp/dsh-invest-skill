@@ -11,4 +11,4 @@
 akshare>=1.11.0        # 行业板块行情 / 资金流 / 5日动量 / 指数（经 akshare 取同花顺/新浪口径）
 
 # 说明：akshare 安装时会自动带入 pandas / numpy 等，无需单独声明。
-# 如需严格申万一级 31 行业口径，可后续接入 Tushare（授权见 plugin.json dependencies）。
+# 如需严格申万一级 31 行业口径，可后续接入 Tushare（需 TUSHARE_TOKEN 环境变量）。

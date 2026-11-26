@@ -115,7 +115,7 @@ description: >
 ### 6.2 四级降级链路（数据采集层）
 
 ```
-L1  Tushare（优先，需 平台声明的 Tushare 授权）      ← 指数/财务/资金流/技术面
+L1  Tushare（优先，需 TUSHARE_TOKEN）      ← 指数/财务/资金流/技术面
         │ 未配置 token / 连接失败 / 权限不足
         ▼
 L2  Akshare（开源主源）                     ← 指数(sina/em)/涨跌统计/板块/个股/资金流/龙虎榜/技术面
@@ -127,7 +127,7 @@ L3  腾讯财经 / 东方财富 Push API（网页兜底）← 仅指数实时行
 L4  演示数据（--demo）                       ← 仅管线校验，不参与生产
 ```
 
-- **L1 Tushare**：优先源。免费版覆盖 **指数（A 股 `index_daily` / 港股 `index_global`）、申万一级行业（`sw_daily`）、资金流（主力净流入 `moneyflow` + 沪深港通 `moneyflow_hsgt`）、龙虎榜（`top_list`）、技术面（`index_daily` 历史 RSI/MA）**；**不含涨跌统计与个股异动全市场快照**（免费版无对应接口），这两维度自动降级到 Akshare。未完成平台声明的 Tushare 授权 时整体降级。
+- **L1 Tushare**：优先源。免费版覆盖 **指数（A 股 `index_daily` / 港股 `index_global`）、申万一级行业（`sw_daily`）、资金流（主力净流入 `moneyflow` + 沪深港通 `moneyflow_hsgt`）、龙虎榜（`top_list`）、技术面（`index_daily` 历史 RSI/MA）**；**不含涨跌统计与个股异动全市场快照**（免费版无对应接口），这两维度自动降级到 Akshare。未配置 `TUSHARE_TOKEN` 时整体降级。
 - **L2 Akshare**：开源主源，覆盖最全。受限网络下 EastMoney 接口可能被拦截，脚本内已做 em→sina 回退。
 - **L3 网页兜底**：腾讯财经 `qt.gtimg.cn` / 东方财富 `push2.eastmoney.com` Push API，仅覆盖指数实时行情字段；板块 / 个股 / 资金流 / 龙虎榜 / 新闻无网页兜底。
 - **L4 演示数据**：`--demo` 内置样例，仅用于验证流程与离线预览。

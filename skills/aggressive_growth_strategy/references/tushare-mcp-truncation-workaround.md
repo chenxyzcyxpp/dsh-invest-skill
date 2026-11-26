@@ -5,12 +5,12 @@
 本机已装 tushare Python 包（1.4.29），用本地直连替代 MCP 即可拿到完整数据。
 
 ## Token 位置
-`平台依赖声明` 的 tushareMcp 段：
+`~/.hermes/config.yaml` 的 tushareMcp 段：
 ```yaml
 tushareMcp:
   url: https://api.tushare.pro/mcp/?token=<TOKEN>
 ```
-定位命令：`grep -ri "tushare" 平台依赖声明`
+定位命令：`grep -ri "tushare" ~/.hermes/config.yaml`
 
 ## 完整成分股获取（顺序与MCP一致 = 权重降序）
 ```python

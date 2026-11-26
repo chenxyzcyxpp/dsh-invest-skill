@@ -129,7 +129,7 @@ PYTHONIOENCODING=utf-8 python3 <skill>/scripts/market_risk.py \
     --code 399006.SZ --name 创业板指
 ```
 
-> 采集脚本通过平台依赖声明获取 Tushare 授权（本地 tushare 库直连，
+> 采集脚本自动从 `~/.hermes/config.yaml` 提取 Tushare token（本地 tushare 库直连，
 > 避免 MCP 大响应截断）；Tushare `pro.news`/`fx_daily` 无权限，新闻走东财搜索、
 > 汇率用 7.15 中性兜底；东财 push2ex 本机可用（push2his 不可用）。
 > 舆情口径为全市场（新闻 + 涨跌分布），三指数共用同一新闻源，指数层面差异体现在各自量价特征。

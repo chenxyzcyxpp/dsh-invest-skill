@@ -30,7 +30,7 @@ input:
   - name: db_config
     type: object
     required: false
-    description: "策略库连接参数 {host, port, user, password, database}；由平台 dependencies 声明统一管理，仓库不内置任何默认值"
+    description: "策略库连接参数 {host, port, user, password, database}；必填项须由环境变量或本对象提供，仓库不内置任何默认值"
 
 # 标准输出契约
 output:

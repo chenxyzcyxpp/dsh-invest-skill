@@ -316,7 +316,7 @@ class DemoSource(DataSource):
 
 
 class TushareSource(DataSource):
-    """tushare 适配器（优先源）。需平台声明的 Tushare 授权才能工作。"""
+    """tushare 适配器（优先源）。需配置 TUSHARE_TOKEN 才能工作。"""
     name = "tushare"
 
     def __init__(self):

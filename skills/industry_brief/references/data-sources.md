@@ -17,7 +17,7 @@
 | 行业资金 | `moneyflow_ind`（如有权限） | 行业主力净流入；无权限则走 Akshare |
 
 > 申万行业指数代码映射见 `scripts/industry_flash.py` 的 `SW_INDUSTRIES`（行业名 → 指数代码）。
-> Tushare 授权由平台依赖声明统一管理。
+> Tushare token 从 `~/.hermes/config.yaml` 提取（与 sentiment 一致）。
 
 ### 1.2 Akshare（次级）
 

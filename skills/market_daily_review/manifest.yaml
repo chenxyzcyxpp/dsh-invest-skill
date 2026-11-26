@@ -54,7 +54,7 @@ data_sources:
   - level: 1
     name: Tushare
     role: 优先源
-    requires: "平台依赖声明中的 Tushare 授权"
+    requires: "TUSHARE_TOKEN 环境变量"
     coverage: "指数(A股/港股)、申万一级行业、资金流(主力净流入+沪深港通)、龙虎榜、技术面；免费版不含涨跌统计/个股异动（该维度降级 Akshare）"
   - level: 2
     name: Akshare

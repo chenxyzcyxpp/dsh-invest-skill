@@ -3,14 +3,14 @@
 """fetch_data.py — Tushare 增量拉取日线与PE数据
 
 用法：
-    # Tushare 授权由平台依赖声明提供
+    export TUSHARE_TOKEN=你的token
     python3 fetch_data.py                 # 拉取全部默认指数
     python3 fetch_data.py --codes 000001.SH,399006.SZ
     python3 fetch_data.py --start 20240101 --end 20261231
 
 行为：
   - 只拉取本地最大日期之后的交易日，追加写入 data/<code>.csv（去重排序）；
-  - Tushare 授权不可用时退出并提示，绝不静默使用陈旧数据冒充最新；
+  - 无 TUSHARE_TOKEN 时退出并提示，绝不静默使用陈旧数据冒充最新；
   - 中证2000（932000.CSI）无 index_dailybasic PE 记录，自动跳过PE。
 """
 import os
@@ -26,9 +26,9 @@ import bsl_core as core
 def get_pro():
     token = os.environ.get('TUSHARE_TOKEN', '').strip()
     if not token:
-        print('[ERROR] 未找到平台声明的 Tushare 授权。')
-        print('        请通过平台依赖声明完成 Tushare 授权。')
-        print('        授权不可用前无法增量更新；可先用现有 data/ 数据跑监控。')
+        print('[ERROR] 未找到环境变量 TUSHARE_TOKEN。')
+        print('        请先执行: export TUSHARE_TOKEN=<你的Tushare Pro Token>')
+        print('        未获取Token前无法增量更新；可先用现有 data/ 数据跑监控。')
         sys.exit(2)
     try:
         import tushare as ts

@@ -1,15 +1,15 @@
-# 因维思·invest-skill投研专家
+# invest-skill投研专家
 
 一位会用工具、会自己查证据的 A 股投研分析师。你不用记技能名，像问同事一样提问——
 它判断该用哪套方法，加载对应技能，再按那套方法取数、算指标、写报告。
 
-![因维思投研链路：从一句提问到一份可溯源报告](docs/preview.png)
+![invest-skill投研链路：从一句提问到一份可溯源报告](docs/preview.png)
 
 ---
 
 ## 30 秒上手
 
-1. **新建会话** → 在预设列表里选「**因维思·invest-skill投研专家**」
+1. **新建会话** → 在预设列表里选「**invest-skill投研专家**」
 2. **直接提问**（不用记技能名，说人话就行）
 3. 需要成稿时会写入工作区 `reports/`，可直接打开或另存
 
@@ -20,6 +20,17 @@
 | 判断能不能抄底 | 创业板指现在能不能抄底？用三层决策检查表给结论 |
 | 两只股票对比 | 对比分析贵州茅台和五粮液，出一份分析师级对比报告 |
 | 全景找机会 | 帮我做今日 A 股投研全景分析，最后给 TOP3 重点公司验证 |
+
+### 左侧栏「投研看板」
+
+装好后左侧导航会多一行 **投研看板**（图标 + 文字），点开是中央面板：
+
+- 15 个技能按「宏观与事件 / 标的分析 / 行情复盘 / 量化与策略」分组，每条写明什么时候用
+- 三句常用提问，点一下直接复制
+- 数据来源与边界说明
+
+面板是纯前端展示，不发起任何请求，也不改变对话内容；收起侧栏时以图标 + tooltip 呈现。
+该入口需要**重启 DSH** 后出现（客户端模块在启动时装配）。
 
 ---
 
@@ -92,7 +103,7 @@
 
 - 运行脚本前会先取随附 Python 路径；缺 `pandas`、`akshare`、`tushare`、`scikit-learn` 等库时会**如实报错**，不会假装跑通。
 - 内置行情快照（`a_share_bottom_monitor/data/`）截止 **2026-10-27**，增量更新需 Tushare。
-- 技能正文里的 `python3`、`~/.hermes`、`.workbuddy` 属上游 WorkBuddy / Linux 环境示例，因维思会按本机 PowerShell 与随附 Python 改写，不会照抄。
+- 技能正文里的 `python3`、`~/.hermes`、`.workbuddy` 属上游 WorkBuddy / Linux 环境示例，专家会按本机 PowerShell 与随附 Python 改写，不会照抄。
 
 ---
 
@@ -114,13 +125,28 @@
 
 ```
 package.json         # dsh.bundle.patch 指向 cordis.patch.yml
-cordis.patch.yml     # 预设声明：人格 + 工具 + 技能提供者 + Tushare MCP 预留行
-index.js             # Host 插件：把 skills/ 注册为技能提供者
+cordis.patch.yml     # 预设声明 + 客户端入口行 + Tushare MCP 预留行
+index.js             # 本包被挂载的那一行（宿主空实现，供客户端模块依附）
+provider.js          # 把 skills/ 注册为技能提供者，只挂在预设内部
+client.js            # 左侧栏「invest-skill投研专家」入口与投研看板面板
 skills/              # 15 个技能（SKILL.md + references/ + scripts/ + templates/，部分含 data/）
 locale/              # 插件页标题与描述（zh / en）
-icon.jpg             # 插件图标（因维思形象）
+docs/                # 详情页特性图
+icon.jpg             # 插件图标
 README.md            # 本文件，即插件详情页的内容
 ```
+
+## 与上游同步
+
+`skills/` 是 [chenxyzcyxpp/invest-skill](https://github.com/chenxyzcyxpp/invest-skill) 的镜像，最近一次同步：
+**2026-11-26**（上游 `9dee1cc`，`docs: 重写 README（功能优先、速览置顶）`）。
+
+同步时保留了两处 DSH 适配：
+
+1. `market-daily-review`、`policy-bottom-monitor` 的 frontmatter `name` 改为 kebab-case（DSH 技能注册表的要求）；
+2. 上游仍假设「妙想 / 腾讯自选股 / 通达信 MCP 已连接」、并把 Python 指向 WorkBuddy 托管 venv——这些段落已改写为「未配置即按缺口处理，用随附 Python 运行」。
+
+上游近期把数据源配置从「平台 dependencies 声明」改成了**环境变量**：策略库用 `RACING_DB_HOST` / `RACING_DB_USER` / `RACING_DB_PASSWORD` / `RACING_DB_NAME`，Tushare 用 `TUSHARE_TOKEN`（缺失时向用户索要，不静默降级）。
 
 ---
 

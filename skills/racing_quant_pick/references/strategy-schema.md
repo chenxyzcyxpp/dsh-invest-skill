@@ -1,8 +1,8 @@
 # 策略库数据模型与查询样本
 
 > 本文件描述量化策略 MySQL 库的核心表结构与查询方式。
-> **连接依赖由平台 `dependencies` 声明统一管理**，本仓库不内置任何 IP、账号或密码。
-> 外部策略信号源由平台依赖声明统一管理。
+> **连接参数必须由使用者自行配置**（环境变量 / `db_config`），本仓库不内置任何 IP、账号或密码。
+> 请连接自有或已获授权的策略库。
 
 ## 1. 连接参数（全部必填，无默认值）
 
@@ -11,7 +11,7 @@
 | `host` | 数据库地址 | `RACING_DB_HOST` / `--db-host` |
 | `port` | 端口 | `RACING_DB_PORT` / `--db-port`（缺省 3306） |
 | `user` | 账号 | `RACING_DB_USER` / `--db-user` |
-| `password` | 密码 | 平台依赖声明 |
+| `password` | 密码 | `RACING_DB_PASSWORD` / `--db-pass` |
 | `database` | 库名 | `RACING_DB_NAME` / `--db-name` |
 
 > 除端口外均为**必填**，缺失时 `scripts/fetch_strategy_positions.py` 会明确报错退出，

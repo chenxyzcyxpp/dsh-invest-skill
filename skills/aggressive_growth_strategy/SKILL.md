@@ -22,8 +22,8 @@ metadata:
 
 本技能为「提示词驱动型」分析框架，仓库内不自带运行环境与外部脚本，实际执行需依赖以下外部条件，请按需自备：
 
-- **数据源（Tushare）**：支持二选一 —— ① `Tushare MCP`（`mcp_tushareMcp_*` 系列工具）；② 本地 `tushare` Python 包直连（token 取自运行环境 `平台依赖声明` 的 `tushareMcp` 段）。MCP 批量返回截断（约 2000 条成分股 ~22 万字符）时，按 `references/tushare-mcp-truncation-workaround.md` 改用本地直连绕过。
-- **舆情检索**：最新动态检索依赖 `cn-web-search` 技能的东财搜索 API 配方（`references/eastmoney-search-api.md`）。
+- **数据源（Tushare）**：支持二选一 —— ① `Tushare MCP`（`mcp_tushareMcp_*` 系列工具）；② 本地 `tushare` Python 包直连（token 取自运行环境 `~/.hermes/config.yaml` 的 `tushareMcp` 段）。MCP 批量返回截断（约 2000 条成分股 ~22 万字符）时，按 `references/tushare-mcp-truncation-workaround.md` 改用本地直连绕过。
+- **舆情检索**：最新动态检索依赖 本技能内置的东财搜索 API 配方（`references/eastmoney-search-api.md`）。
 - **入池副作用（可选）**：综合评级 B+及以上时，技能会执行 `python3 ~/.hermes/aggressive-growth-tracker/update_tracker.py add ...` 写入高评级跟踪池。该脚本与 `~/.hermes/` 目录**不在本仓库内**，需运行环境自备；若仅做分析、不维护跟踪池，可跳过该步骤，仅产出分析报告。
 - **报告输出**：提供 Feishu Markdown 模板（`templates/csi2000-report-template.md`），可适配为其他发布渠道。
 - **调度（可选）**：可作为每日 cron 任务（来源 `csi2000_rotation`）触发；轮换状态文件 `~/.hermes/cron/csi2000_rotation.json` 由运行环境维护，不存在时从 -1 开始。
@@ -83,7 +83,7 @@ metadata:
 `mcp_tushareMcp_moneyflow` 近5日，判断主力（大单+特大单）连续净流入/流出。
 
 ### 7. 最新动态
-用东财搜索API（execute_code + urllib.request，配方见 cn-web-search 技能 references/eastmoney-search-api.md）：
+用东财搜索API（execute_code + urllib.request，配方见 references/eastmoney-search-api.md）：
 - **个股：裸股票名 + sort=default**（加"最新消息/研报"后缀会被全站热点污染）
 - 行业宽泛搜索易污染，改用具体公司/事件关键词 + sort=time
 - 任务要求三连搜："[名称] 最新消息" / "[名称] 研报" / "[行业] 趋势 2026"
@@ -150,5 +150,4 @@ A+=极强关注 / A=强烈关注 / A-=重点关注 / B+=值得关注偏强 / B=�
 ## 支持文件
 - references/methodology.md — **方法论内核全本**（道·法·术·器四层体系：农耕周期、好产业公式、选股七标准、倒金字塔、风控三体系、对手盘模型、执行指南、注意事项）
 - references/tushare-mcp-truncation-workaround.md — token 位置、完整成分股获取、指数成员查询、250日分位/均量计算代码
-- references/eastmoney-search-api.md — 东财搜索 API 端点、`param` 结构、urllib 调用模板与三连搜策略（第 7 步最新动态）
 - templates/csi2000-report-template.md — Feishu 报告模板

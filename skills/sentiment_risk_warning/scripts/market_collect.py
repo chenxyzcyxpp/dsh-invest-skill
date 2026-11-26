@@ -26,7 +26,8 @@ market_collect.py — 大盘舆情风险预警 · 真实数据采集器（三指
 或跑三指数汇总对比：
   PYTHONIOENCODING=utf-8 python3 market_risk.py --compare <out> --out <out>
 
-Tushare 授权由平台依赖声明统一管理；授权不可用时按降级策略处理。
+Tushare token 自动从 ~/.hermes/config.yaml 的 tushareMcp.url 提取；
+若提取失败可手工 python3 -c "import tushare; tushare.set_token('<token>')"。
 """
 
 import argparse
@@ -50,7 +51,7 @@ INDEXES = [
 
 
 def get_tushare_token():
-    """Tushare 授权由平台依赖声明统一管理。"""
+    """从 ~/.hermes/config.yaml 的 tushareMcp.url 提取 token。"""
     import yaml
     cfg_path = os.path.expanduser("~/.hermes/config.yaml")
     if os.path.exists(cfg_path):

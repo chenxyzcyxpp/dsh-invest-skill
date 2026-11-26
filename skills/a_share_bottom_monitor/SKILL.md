@@ -74,11 +74,11 @@ a-share-bottom-monitor/
 ### 2.1 数据源与更新
 
 - 数据源：Tushare Pro 日线（`daily`）与指数PE（`index_dailybasic`）。
-  Tushare 数据源依赖见 `plugin.json` 的 `dependencies` 声明；不可用时按降级策略处理，不得静默跳过，
+  Token 从环境变量 `TUSHARE_TOKEN` 读取；**缺失时向用户索要，不得静默跳过**，
   更不得把陈旧数据当作最新数据输出。
 - 更新命令：`python3 scripts/fetch_data.py`（只拉取本地最大日期之后的交易日，
   追加写入并去重排序；禁止整表重写）。
-- 数据源不可用时：明确告知用户"无法增量更新，当前监控基于 data/ 内截至 X 的数据"。
+- 无Token时：明确告知用户"无法增量更新，当前监控基于 data/ 内截至 X 的数据"。
 - 数据更新后必须重跑 `python3 scripts/path_stats.py` 全量重建 `path_map.json`，
   否则路径分布与监控状态的数据截止日不一致。
 
@@ -106,7 +106,7 @@ a-share-bottom-monitor/
 1. **先查时钟**：读 `references/history-updates.md` 顶部条目日期，距今天 >180天 →
    按模式B先重跑，或在报告头部标注过期警示（monitor.py 会自动标注）。
    注意：只把「统计重跑类」条目当作计时基准，v1.2 决策层扩展不重置计时。
-2. **更新数据**：`fetch_data.py` → `check_integrity.py`（数据源不可用则用现有数据并说明）。
+2. **更新数据**：`fetch_data.py` → `check_integrity.py`（无Token则用现有数据并说明）。
 3. **跑监控**：`python3 scripts/monitor.py --out report_YYYYMMDD.md`
    （自动计算各指数当前7项指标、比对 signal_map.json、生成报告）。
 4. **向用户转述**报告核心：每个指数的判断（具备/不具备/观察）、满足的信号及历史

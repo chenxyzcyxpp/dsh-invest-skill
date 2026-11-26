@@ -59,13 +59,15 @@ metadata:
 
 ## 四、策略库连接配置（⚠️ 红线）
 
-- 连接依赖由平台 `dependencies` 声明统一管理，
+- 连接参数 **必须由使用者自行配置**，通过环境变量或 `db_config` 传入，
   **禁止硬编码 IP/账号/密码**；本技能与参考脚本**不内置任何默认数据源**。
-- 必填连接项由平台依赖声明提供；缺失时明确报错退出，不回退到任何隐含默认值。
-- 外部策略信号源作为独立依赖，由平台 `dependencies` 声明统一管理。
+- 必填项：`RACING_DB_HOST` / `RACING_DB_USER` / `RACING_DB_PASSWORD` / `RACING_DB_NAME`
+  （端口可选，缺省 3306）；缺失时明确报错退出，不回退到任何隐含默认值。
+- 请连接**自有或已获授权**的策略库；任何外部策略库都视为「外部策略信号源」，
+  可用性、合规性与数据授权由接入方自行负责。
 - 该连接是**策略信号源**，与行情数据源（Tushare/Akshare/东财）分层，不计入行情网关降级链。
 - 连接失败 → 如实返回错误，不得编造持仓或返回占位值。
-- 说明见 `references/strategy-schema.md` 与 `scripts/fetch_strategy_positions.py`。
+- 配置说明见 `references/strategy-schema.md` 与 `scripts/fetch_strategy_positions.py`。
 
 ## 五、与个股分析衔接（可选）
 

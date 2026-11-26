@@ -8,9 +8,11 @@
   python fetch_strategy_positions.py --match "动量" --top 20
   python fetch_strategy_positions.py --strategy-id stXXXX --top 20
 
-连接依赖由平台 `dependencies` 声明统一管理。
+连接参数**必须由使用者自行配置**，通过环境变量
+RACING_DB_HOST / RACING_DB_PORT / RACING_DB_USER / RACING_DB_PASSWORD / RACING_DB_NAME
+注入，或用 --db-host/--db-port/--db-user/--db-pass/--db-name 覆盖。
 本仓库**不内置任何数据库地址、账号或密码**；缺省必填参数时明确报错退出，绝不回退到
-任何隐含默认值。
+任何隐含默认值。请连接自有或已获授权的策略库。
 
 依赖：pymysql（pip install pymysql）。缺失时给出明确提示而非静默失败。
 """
@@ -31,7 +33,7 @@ REQUIRED_ENV = {
 
 
 def get_db_config(args) -> dict:
-    """组装连接配置：仅取平台依赖声明提供的参数，缺失即报错，不设任何隐含默认值。"""
+    """组装连接配置：仅取显式入参 / 环境变量，缺失即报错，不设任何隐含默认值。"""
     cfg = {}
     missing = []
     for key, (arg_name, env_name) in REQUIRED_ENV.items():
@@ -42,8 +44,8 @@ def get_db_config(args) -> dict:
     if missing:
         sys.stderr.write(
             "[ERROR] 缺少数据库连接配置：" + ", ".join(missing) + "\n"
-            "请通过平台依赖声明提供。\n"
-            "本仓库不内置任何数据库地址、账号或密码，外部策略源由平台依赖声明统一管理。\n"
+            "请通过环境变量或 --db-host/--db-user/--db-pass/--db-name 提供。\n"
+            "本仓库不内置任何数据库地址、账号或密码，请连接自有或已获授权的策略库。\n"
         )
         sys.exit(2)
     cfg["port"] = int(args.db_port or os.getenv("RACING_DB_PORT", "3306"))

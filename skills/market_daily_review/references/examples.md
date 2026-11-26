@@ -75,14 +75,14 @@ python3 scripts/market_review.py --demo --no-news
 
 ## 五、降级行为示例
 
-- **未完成平台声明的 Tushare 授权 + akshare 可用**：自动 L1→L2，报告 `data_source=akshare`。
+- **无 TUSHARE_TOKEN + akshare 可用**：自动 L1→L2，报告 `data_source=akshare`。
 - **akshare 全接口不可达**：L1→L2 失败，L3 网页兜底仅补齐指数；板块 / 个股等标注「数据待补充」，`degraded=true`。
 - **指数 / 板块四类源全失败**：脚本抛 `MKT_REVIEW_001` 并以退出码 2 退出，**不输出伪造报告**。
 - **龙虎榜 / 资讯缺口**：报告第十节标注 `dragon, news` 为缺失项，不编造具体数值。
 
 ## 六、最佳实践
 
-1. 生产环境优先完成平台声明的 Tushare 授权 以获得最完整覆盖；未配置时自动降级到 Akshare。
+1. 生产环境优先配置 `TUSHARE_TOKEN` 以获得最完整覆盖；未配置时自动降级到 Akshare。
 2. 受限网络环境关注 EastMoney 接口拦截，脚本已内置 sina / 网页兜底。
 3. 市场级新闻建议结合 WebSearch 补充，脚本仅负责结构化维度，不编造资讯。
 4. 每次运行检查 `degrade_trace`，对标注「数据待补充」的维度谨慎引用。
