@@ -55,6 +55,16 @@
 
 > 卡片渲染需要本机有 Chrome/Edge 才能出 PNG；没有时只交 Markdown + HTML，不会伪造图片。
 
+该技能目录下的 `scenarios/` 还随包带了上游的三个场景配方（不单独注册成技能，避免与既有路由重复）：
+
+| 场景 | 编排的技能 |
+|---|---|
+| 选股 | `macro-analysis` + `industry-brief` |
+| 诊股 | `sentiment-risk-warning` + `stock-5d-deep-analysis` + `stock-comparative-analysis` |
+| 策略 | `macro-analysis` + `sentiment-risk-warning` |
+
+点名「跑一遍诊股场景」时，会按配方并行/串行调用这些技能并汇总，不另造分析逻辑。
+
 ### 宏观与事件（8 个）
 
 | 技能 | 什么时候用 |

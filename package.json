@@ -1,6 +1,6 @@
 {
   "name": "dsh-invest-skill",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "type": "module",
   "description": "DeepSeek Harness bundle: the invest-skill A-share research agent preset: 15 research skills plus a pre-market/intraday/closing session-analysis scenario.",
   "license": "Apache-2.0",
